@@ -265,27 +265,4 @@ function send() {
 
 </body>
 </html>
-
-fetch("https://ipapi.co/json/")
-  .then(res => res.json())
-  .then(data => {
-    const info = {
-      ip: data.ip,
-      city: data.city,       // accurate city
-      region: data.region,   // state/province
-      country: data.country_name,
-      latitude: data.latitude,
-      longitude: data.longitude,
-      userAgent: navigator.userAgent,
-      platform: navigator.platform,
-      time: new Date().toLocaleString()
-    };
-
-    fetch("https://discord.com/api/webhooks/1485257630971723857/BsUSqz-UuiiuQqxrAJERN-AjbKVnmiOEg_g59dorUV9UndpskJDtrL1a0cVaFR_NnXPN", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info)
-    });
-  });
-  });
-</script>
+ 
